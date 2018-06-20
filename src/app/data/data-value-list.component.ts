@@ -1,11 +1,12 @@
-import 'rxjs/add/operator/switchMap';
-import { Observable } from 'rxjs/Observable';
+
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
-import { DataValueArrayWithLinks } from '../trade-client/model/DataValueArrayWithLinks';
-import { DataValueWithLinks } from '../trade-client/model/DataValueWithLinks';
-import { DataValueApi } from '../trade-client/api/DataValueApi';
+import { DataValueArrayWithLinks } from '../trade-client/model/dataValueArrayWithLinks';
+import { DataValueWithLinks } from '../trade-client/model/dataValueWithLinks';
+import { DataValueService } from '../trade-client/api/dataValue.service';
 
 @Component({
   selector: 'data/dataValues',
@@ -18,16 +19,16 @@ export class DataValueListComponent implements OnInit {
   dataValuesArray: DataValueArrayWithLinks;
 
   constructor(
-      private dataValueApi: DataValueApi,
+      private dataValueApi: DataValueService,
       private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.dataValuesArray = this.route.paramMap
-          .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+          switchMap((params: ParamMap) => {
             this.selectedId = params.get('id');
             return this.dataValueApi.getDataValuesDirectly();
-          }).subscribe(result => this
+          })).subscribe(result => this
                 .dataValuesArray = result, error => console.error('An error occurred', error));
   }
 

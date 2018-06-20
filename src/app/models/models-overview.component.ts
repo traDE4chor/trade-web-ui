@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NotifierServiceArrayWithLinks } from '../trade-client/model/NotifierServiceArrayWithLinks';
-import { NotifierServiceArray } from '../trade-client/model/NotifierServiceArray';
-import { NotifierServiceApi } from '../trade-client/api/NotifierServiceApi';
+import { NotifierServiceArrayWithLinks } from '../trade-client/model/notifierServiceArrayWithLinks';
+import { NotifierServiceArray } from '../trade-client/model/notifierServiceArray';
+import { NotifierServiceService } from '../trade-client/api/notifierService.service';
 
 @Component({
   selector: 'models',
@@ -12,10 +12,10 @@ export class ModelsOverviewComponent implements OnInit {
 
   notifierServiceArray: NotifierServiceArrayWithLinks;
 
-  constructor(private notifierService: NotifierServiceApi) { }
+  constructor(private notifierService: NotifierServiceService) { }
 
   ngOnInit(): void {
-    this.notifierServiceArray = this.notifierService.getNotifierServices().subscribe(result => this
+    this.notifierService.getNotifierServices().subscribe(result => this
     .notifierServiceArray = result, error => console.error('An error occurred', error));
   }
 

@@ -1,31 +1,46 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { Configuration } from './configuration';
 
-import { DataDependencyGraphApi } from './api/DataDependencyGraphApi';
-import { DataElementApi } from './api/DataElementApi';
-import { DataElementInstanceApi } from './api/DataElementInstanceApi';
-import { DataModelApi } from './api/DataModelApi';
-import { DataObjectApi } from './api/DataObjectApi';
-import { DataObjectInstanceApi } from './api/DataObjectInstanceApi';
-import { DataValueApi } from './api/DataValueApi';
-import { NotificationApi } from './api/NotificationApi';
-import { NotifierServiceApi } from './api/NotifierServiceApi';
-import { ResourceEventFilterApi } from './api/ResourceEventFilterApi';
+import { DataDependencyGraphService } from './api/dataDependencyGraph.service';
+import { DataElementService } from './api/dataElement.service';
+import { DataElementInstanceService } from './api/dataElementInstance.service';
+import { DataModelService } from './api/dataModel.service';
+import { DataObjectService } from './api/dataObject.service';
+import { DataObjectInstanceService } from './api/dataObjectInstance.service';
+import { DataValueService } from './api/dataValue.service';
+import { NotificationService } from './api/notification.service';
+import { NotifierServiceService } from './api/notifierService.service';
+import { ResourceEventFilterService } from './api/resourceEventFilter.service';
 
 @NgModule({
-  imports:      [ CommonModule, HttpModule ],
+  imports:      [ CommonModule, HttpClientModule ],
   declarations: [],
   exports:      [],
-  providers:    [ DataDependencyGraphApi, DataElementApi, DataElementInstanceApi, DataModelApi, DataObjectApi,
-  DataObjectInstanceApi, DataValueApi, NotificationApi, NotifierServiceApi, ResourceEventFilterApi ]
+  providers: [
+    DataDependencyGraphService,
+    DataElementService,
+    DataElementInstanceService,
+    DataModelService,
+    DataObjectService,
+    DataObjectInstanceService,
+    DataValueService,
+    NotificationService,
+    NotifierServiceService,
+    ResourceEventFilterService ]
 })
 export class ApiModule {
-    public static forConfig(configuration: Configuration): ModuleWithProviders {
+    public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders {
         return {
             ngModule: ApiModule,
-            providers: [ {provide: Configuration, useValue: configuration}]
+            providers: [ { provide: Configuration, useFactory: configurationFactory } ]
+        }
+    }
+
+    constructor( @Optional() @SkipSelf() parentModule: ApiModule) {
+        if (parentModule) {
+            throw new Error('ApiModule is already loaded. Import your base AppModule only.');
         }
     }
 }

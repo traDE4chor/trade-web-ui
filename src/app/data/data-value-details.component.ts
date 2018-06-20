@@ -1,11 +1,12 @@
-import 'rxjs/add/operator/switchMap';
+
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
-import { DataValueWithLinks } from '../trade-client/model/DataValueWithLinks';
-import { DataValue } from '../trade-client/model/DataValue';
-import { DataValueApi } from '../trade-client/api/DataValueApi';
+import { DataValueArrayWithLinks } from '../trade-client/model/dataValueArrayWithLinks';
+import { DataValueWithLinks } from '../trade-client/model/dataValueWithLinks';
+import { DataValueService } from '../trade-client/api/dataValue.service';
 
 @Component({
   selector: 'data/dataValue/:id',
@@ -18,13 +19,13 @@ export class DataValueDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private dataValueApi: DataValueApi
+    private dataValueApi: DataValueService
   ) {}
 
   ngOnInit(): void {
-    this.dataValue$ = this.route.paramMap
-        .switchMap((params: ParamMap) =>
-          this.dataValueApi.getDataValueDirectly(params.get('id')));
+    this.dataValue$ = this.route.paramMap.pipe(
+        switchMap((params: ParamMap) =>
+          this.dataValueApi.getDataValueDirectly(params.get('id'))));
   }
 
   gotoDataValues(dataValue: DataValueWithLinks) {
