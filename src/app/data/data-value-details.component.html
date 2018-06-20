@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+        <li><a routerLink="/models">Models</a></li>
+        <li><a routerLink="/instances">Instances</a></li>
+        <li class="active"><a routerLink="/data">Data</a></li>
+        <li><a routerLink="/notifications">Notifications</a></li>
+      </ul>
+      <img class="trade-icon image-responsive" src="../assets/trade-logo.png"/>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <div *ngIf="dataValue$ | async as dataValue">
+        <h2>"{{ dataValue.dataValue.name }}" Details</h2>
+        <div>
+          <label>Id:</label>
+          {{ dataValue.dataValue.id }}
+        </div>
+
+        <p>
+          <button (click)="gotoDataValues(dataValue)">Back</button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
