@@ -1,0 +1,72 @@
+<div *ngIf="ddg$ | async as ddg">
+  <h2>Data Dependency Graph: "{{ ddg.dataDependencyGraph.name }}"</h2>
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <tbody>
+      <tr>
+        <th scope="row" style="width: 20%">Id</th>
+        <td>{{ddg.dataDependencyGraph.id }}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">HREF</th>
+        <td><a href="{{ ddg.dataDependencyGraph.href }}">{{ ddg.dataDependencyGraph.href }}</a></td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Name</th>
+        <td>{{ ddg.dataDependencyGraph.name }}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Entity</th>
+        <td>{{ ddg.dataDependencyGraph.entity }}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Target Namespace</th>
+        <td>{{ ddg.dataDependencyGraph.targetNamespace }}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Transformations</th>
+        <td>
+          <ul>
+            <li *ngFor="let transformation of ddg.dataDependencyGraph.transformations">
+              {{ transformation.name }} &#8614; {{transformation.transformerQName}}
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%; vertical-align: middle">Upload data</th>
+        <td>
+          <div class="placeholder">
+            <input type="file" name="fileSelection" ng2FileSelect [uploader]="uploader"
+                   (change)="fileSelected(ddg.dataDependencyGraph.href)"/>
+          </div>
+
+          <button type="button" class="btn btn-success"
+                  (click)="uploadFile(ddg.dataDependencyGraph)"
+                  [disabled]="!uploader.getNotUploadedItems().length">
+            Upload Data
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%" style="text-align: center">
+          <div class="placeholders">
+            <button type="button" class="btn btn-default"
+                    (click)="getDataOfDDG(ddg.dataDependencyGraph)">Show XML specification
+            </button>
+          </div>
+
+          <a class="btn btn-success" role="button" href="{{ ddg.dataDependencyGraph.href }}/serialized-graph">
+            Download XML specification</a>
+        </th>
+        <td>
+          <div style="white-space:pre">{{data}}</div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <a class="btn btn-info" routerLink="/models/ddgs" role="button">Back</a>
+</div>

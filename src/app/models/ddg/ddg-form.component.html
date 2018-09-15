@@ -1,0 +1,32 @@
+<h2>Create a Data Dependency Graph</h2>
+<form #ddgForm="ngForm">
+  <div class="form-group">
+    <label for="ddgName">Name:</label>
+    <input class="form-control" required [(ngModel)]="ddg.name" name="name" #name="ngModel"
+           placeholder="name of data dependency graph"
+           id="ddgName">
+    <div *ngIf="name.invalid && (name.dirty || name.touched)"
+         class="alert alert-danger">
+      A Name for the data dependency graph is required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="ddgEntity">Entity:</label>
+    <input class="form-control" required [(ngModel)]="ddg.entity" name="entity"
+           #entity="ngModel"
+           placeholder="Name of the entity to which this data dependency graph belongs, e.g., your name."
+           id="ddgEntity">
+    <div *ngIf="entity.invalid && (entity.dirty || entity.touched)"
+         class="alert alert-danger">
+      Information about the entity to which this data dependency graph belongs is required
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-success" [disabled]="ddgForm.invalid" (click)="submitDDG()">Submit
+  </button>
+  <button type="button" class="btn btn-default" (click)="newDDG(); ddgForm.resetForm({})">Reset</button>
+</form>
+
+<br>
+<a class="btn btn-info" routerLink="/models/ddgs" role="button">Cancel</a>

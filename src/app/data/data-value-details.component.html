@@ -1,27 +1,125 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
-      <ul class="nav nav-sidebar">
-        <li><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-        <li><a routerLink="/models">Models</a></li>
-        <li><a routerLink="/instances">Instances</a></li>
-        <li class="active"><a routerLink="/data">Data</a></li>
-        <li><a routerLink="/notifications">Notifications</a></li>
-      </ul>
-      <img class="trade-icon image-responsive" src="../assets/trade-logo.png"/>
-    </div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-      <div *ngIf="dataValue$ | async as dataValue">
-        <h2>"{{ dataValue.dataValue.name }}" Details</h2>
-        <div>
-          <label>Id:</label>
-          {{ dataValue.dataValue.id }}
-        </div>
+<div *ngIf="dataValue$ | async as dataValue">
+  <h2>Data Value: "{{ dataValue.dataValue.name }}"</h2>
 
-        <p>
-          <button (click)="gotoDataValues(dataValue)">Back</button>
-        </p>
-      </div>
-    </div>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <tbody>
+      <tr>
+        <th scope="row" style="width: 20%">Id</th>
+        <td>{{ dataValue.dataValue.id }}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">HREF</th>
+        <td><a href="{{ dataValue.dataValue.href }}">{{ dataValue.dataValue.href }}</a></td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Name</th>
+        <td>{{ dataValue.dataValue.name }}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Created by</th>
+        <td>{{ dataValue.dataValue.createdBy }}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Type</th>
+        <td>{{ dataValue.dataValue.type }}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Content type</th>
+        <td>{{ dataValue.dataValue.contentType }}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Created</th>
+        <td>{{dataValue.dataValue.created | date:'yyyy-MM-dd, HH:mm:ss'}}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Last modified</th>
+        <td>{{dataValue.dataValue.lastModified | date:'yyyy-MM-dd, HH:mm:ss'}}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Status</th>
+        <td>{{ dataValue.dataValue.status }}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Size</th>
+        <td>{{ dataValue.dataValue.size }}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%; vertical-align: middle">Upload data</th>
+        <td>
+          <div [ngSwitch]="getClassOfData(dataValue.dataValue)">
+            <div *ngSwitchCase="'simple'">
+              <div class="placeholder">
+                <textarea [(ngModel)]="uploadData" rows="4" cols="50"></textarea>
+              </div>
+
+              <button type="button" class="btn btn-success"
+                      (click)="uploadSimpleData(dataValue.dataValue)">
+                Upload Data
+              </button>
+            </div>
+            <div *ngSwitchDefault>
+              <div class="placeholder">
+                <input type="file" name="fileSelection" ng2FileSelect [uploader]="uploader"
+                       (change)="fileSelected(dataValue.dataValue.href)"/>
+              </div>
+
+              <button type="button" class="btn btn-success"
+                      (click)="uploadFile(dataValue.dataValue)"
+                      [disabled]="!uploader.getNotUploadedItems().length">
+                Upload Data
+              </button>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%" style="text-align: center">
+          <div class="placeholders">
+            <button type="button" class="btn btn-default"
+                    (click)="getDataOfDataValue(dataValue.dataValue)">Data Preview
+            </button>
+          </div>
+
+          <a class="btn btn-success" role="button" href="{{ dataValue.dataValue.href }}/data">Download</a>
+        </th>
+        <td>
+          <div [ngSwitch]="getClassOfData(dataValue.dataValue)">
+            <div *ngSwitchCase="'video'">
+              <video *ngIf="data" controls>
+                <source src="data:{{dataValue.dataValue.contentType}};base64,{{data}}"
+                        type="{{dataValue.dataValue.contentType}}">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div *ngSwitchCase="'image'">
+              <img *ngIf="data"
+                   src="data:{{dataValue.dataValue.contentType}};base64,{{data}}"
+                   alt="{{dataValue.dataValue.name}}">
+            </div>
+            <div *ngSwitchCase="'text'">
+              <div style="white-space:pre">{{data}}</div>
+            </div>
+            <div *ngSwitchCase="'pdf'">
+              <pdf-viewer *ngIf="pdfSrc" [src]="pdfSrc"
+                          [render-text]="true" [show-all]="false"
+                          style="display: block;"></pdf-viewer>
+            </div>
+            <div *ngSwitchCase="'xml'">
+              <div style="white-space:pre">{{data}}</div>
+            </div>
+            <div *ngSwitchCase="'simple'">
+              <div style="white-space:pre">{{data}}</div>
+            </div>
+            <div *ngSwitchDefault>
+              <p>Preview of data not possible, due to unsupported type/contentType.</p>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
+
+  <a class="btn btn-info" routerLink="/data/dataValues" role="button">Back</a>
 </div>

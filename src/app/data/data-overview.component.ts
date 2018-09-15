@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DataValueArrayWithLinks } from '../trade-client/model/dataValueArrayWithLinks';
-import { DataValueWithLinks } from '../trade-client/model/dataValueWithLinks';
+import { DataValueArray } from '../trade-client/model/dataValueArray';
 import { DataValueService } from '../trade-client/api/dataValue.service';
 
 @Component({
@@ -10,12 +9,12 @@ import { DataValueService } from '../trade-client/api/dataValue.service';
 })
 export class DataOverviewComponent implements OnInit {
 
-  dataValueArray: DataValueArrayWithLinks;
+  dataValueArray: DataValueArray;
 
   constructor(private dataValueApi: DataValueService) { }
 
   ngOnInit(): void {
-    this.dataValueApi.getDataValuesDirectly(1,10).subscribe(result => this
-    .dataValueArray = result, error => console.error('An error occurred', error));
+    this.dataValueApi.getDataValuesDirectly(1,20).subscribe(result => this
+    .dataValueArray = result.dataValues, error => console.error('An error occurred', error));
   }
 }

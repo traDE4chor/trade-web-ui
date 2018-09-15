@@ -1,36 +1,28 @@
+import {Component, OnInit} from '@angular/core';
 
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-
-import { DataValueArrayWithLinks } from '../trade-client/model/dataValueArrayWithLinks';
-import { DataValueWithLinks } from '../trade-client/model/dataValueWithLinks';
-import { DataValueService } from '../trade-client/api/dataValue.service';
+import {DataValueArray} from '../trade-client/model/dataValueArray';
+import {DataValueWithLinks} from '../trade-client/model/dataValueWithLinks';
+import {DataValueService} from '../trade-client/api/dataValue.service';
 
 @Component({
-  selector: 'data/dataValues',
+  selector: 'data-values',
   templateUrl: './data-value-list.component.html',
 })
 export class DataValueListComponent implements OnInit {
 
-  private selectedId: string;
-
-  dataValuesArray: DataValueArrayWithLinks;
+  dataValuesArray: DataValueArray;
 
   constructor(
-      private dataValueApi: DataValueService,
-      private route: ActivatedRoute
-  ) {}
-
-  ngOnInit(): void {
-    this.route.paramMap.pipe(
-          switchMap((params: ParamMap) => {
-            this.selectedId = params.get('id');
-            return this.dataValueApi.getDataValuesDirectly();
-          })).subscribe(result => this
-                .dataValuesArray = result, error => console.error('An error occurred', error));
+    private dataValueApi: DataValueService
+  ) {
   }
 
-  trackByDataValues(index: number, dataValue: DataValueWithLinks): string { return dataValue.dataValue.id; }
+  ngOnInit(): void {
+    this.dataValueApi.getDataValuesDirectly().subscribe(result => this
+      .dataValuesArray = result.dataValues, error => console.error('An error occurred', error));
+  }
+
+  trackByDataValues(index: number, dataValue: DataValueWithLinks): string {
+    return dataValue.dataValue.id;
+  }
 }

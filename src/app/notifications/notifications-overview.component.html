@@ -1,26 +1,10 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
-      <ul class="nav nav-sidebar">
-        <li><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-        <li><a routerLink="/models">Models</a></li>
-        <li><a routerLink="/instances">Instances</a></li>
-        <li><a routerLink="/data">Data</a></li>
-        <li class="active"><a routerLink="/notifications">Notifications</a></li>
-      </ul>
-      <img class="trade-icon image-responsive" src="../assets/trade-logo.png"/>
-    </div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-      <h1 class="page-header">Notifications Overview</h1>
+<h1 class="page-header">Notifications Overview</h1>
 
-      <h2 class="sub-header">Notifier Services</h2>
-      <div class="grid grid-pad">
-        <div *ngFor="let service of notifierServiceArray.notifierServices" class="col-1-4">
-          <div>
-            <h4>{{service.id}} : {{service.href}}</h4>
-          </div>
-        </div>
-      </div>
+<h3 class="sub-header">Available Notifier Services</h3>
+<div class="grid grid-pad">
+  <div *ngFor="let service of notifierServiceArray" class="col-1-4">
+    <div>
+      <h4>{{service.id}} : {{service.href}}</h4>
     </div>
   </div>
 </div>

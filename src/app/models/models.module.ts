@@ -1,20 +1,27 @@
 import { NgModule }       from '@angular/core';
 import { CommonModule }   from '@angular/common';
 import { FormsModule }    from '@angular/forms';
-import { ApiModule } from '../trade-client/api.module';
+import {FileUploadModule} from 'ng2-file-upload';
 
 import { ModelsOverviewComponent } from './models-overview.component';
 
 import { ModelRoutingModule } from './models-routing.module';
+import { DdgListComponent } from './ddg/ddg-list.component';
+import { DdgDetailsComponent } from './ddg/ddg-details.component';
+import { DdgFormComponent } from './ddg/ddg-form.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ModelRoutingModule
+    ModelRoutingModule,
+    FileUploadModule
   ],
   declarations: [
-    ModelsOverviewComponent
+    ModelsOverviewComponent,
+    DdgListComponent,
+    DdgDetailsComponent,
+    DdgFormComponent
   ]
 })
 export class ModelsModule {}

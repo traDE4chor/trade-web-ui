@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { NotifierServiceArrayWithLinks } from '../trade-client/model/notifierServiceArrayWithLinks';
-import { NotifierServiceArray } from '../trade-client/model/notifierServiceArray';
-import { NotifierServiceService } from '../trade-client/api/notifierService.service';
+import {
+  DataDependencyGraphArray,
+  DataDependencyGraphService,
+  DataElementArray, DataElementService,
+  DataObjectArray,
+  DataObjectService
+} from "../trade-client";
 
 @Component({
   selector: 'models',
@@ -10,13 +14,24 @@ import { NotifierServiceService } from '../trade-client/api/notifierService.serv
 })
 export class ModelsOverviewComponent implements OnInit {
 
-  notifierServiceArray: NotifierServiceArrayWithLinks;
+  dataDependencyGraphArray: DataDependencyGraphArray;
 
-  constructor(private notifierService: NotifierServiceService) { }
+  dataObjectArray: DataObjectArray;
+
+  dataElementArray: DataElementArray;
+
+  constructor(private ddgApi: DataDependencyGraphService, private dataObjectApi: DataObjectService, private dataElementApi: DataElementService) {
+  }
 
   ngOnInit(): void {
-    this.notifierService.getNotifierServices().subscribe(result => this
-    .notifierServiceArray = result, error => console.error('An error occurred', error));
+    this.ddgApi.getDataDependencyGraphs(1, 10).subscribe(result => this
+      .dataDependencyGraphArray = result.dataDependencyGraphs, error => console.error('An error occurred', error));
+
+    this.dataObjectApi.getAllDataObjects(1, 10).subscribe(result => this
+      .dataObjectArray = result.dataObjects, error => console.error('An error occurred', error));
+
+    this.dataElementApi.getAllDataElements(1, 10).subscribe(result => this
+      .dataElementArray = result.dataElements, error => console.error('An error occurred', error));
   }
 
 }

@@ -1,0 +1,37 @@
+<app-header></app-header>
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
+      <ul class="nav nav-pills flex-column nav-sidebar">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/dashboard">Overview
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/models">Models</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/instances">Instances</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/data">Data</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/notifications">Notifications</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/transformations">Transformations</a>
+        </li>
+      </ul>
+
+      <img class="trade-icon" src="../assets/trade-logo.png"/>
+    </nav>
+
+    <main role="main" class="col-sm-9 col-md-10 pl-5 pt-3 pr-5 main">
+      <ng-content></ng-content>
+    </main>
+
+  </div>
+</div>
+<app-footer></app-footer>

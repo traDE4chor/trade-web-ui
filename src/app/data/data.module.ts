@@ -1,24 +1,34 @@
-import { NgModule }       from '@angular/core';
-import { CommonModule }   from '@angular/common';
-import { FormsModule }    from '@angular/forms';
-import { ApiModule } from '../trade-client/api.module';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {FileUploadModule} from 'ng2-file-upload';
 
-import { DataOverviewComponent } from './data-overview.component';
-import { DataValueListComponent } from './data-value-list.component';
-import { DataValueDetailsComponent } from './data-value-details.component';
+import {DataOverviewComponent} from './data-overview.component';
+import {DataValueListComponent} from './data-value-list.component';
+import {DataValueDetailsComponent} from './data-value-details.component';
 
-import { DataRoutingModule } from './data-routing.module';
+import {DataValueFormComponent} from './data-value-form.component';
+import {ContentTypeValidatorDirective} from './content-type-validator.directive';
+
+import {PdfViewerModule} from 'ng2-pdf-viewer';
+
+import {DataRoutingModule} from './data-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    DataRoutingModule
+    DataRoutingModule,
+    PdfViewerModule,
+    FileUploadModule
   ],
   declarations: [
     DataOverviewComponent,
     DataValueListComponent,
-    DataValueDetailsComponent
+    DataValueDetailsComponent,
+    DataValueFormComponent,
+    ContentTypeValidatorDirective
   ]
 })
-export class DataModule {}
+export class DataModule {
+}

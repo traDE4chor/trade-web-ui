@@ -1,0 +1,70 @@
+<h2>Create a Data Value</h2>
+<form #dataValueForm="ngForm" dataValueContentTypeValidation>
+  <div class="cross-validation"
+       [class.cross-validation-error]="dataValueForm.errors?.missingContentType && (dataValueForm.touched || dataValueForm.dirty)">
+    <div class="form-group">
+      <label for="dataValueName">Name:</label>
+      <input class="form-control" required [(ngModel)]="dataValue.name" name="name" #name="ngModel"
+             placeholder="name of data value"
+             id="dataValueName">
+      <div *ngIf="name.invalid && (name.dirty || name.touched)"
+           class="alert alert-danger">
+        A Name for the data value is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="dataValueCreatedBy">Created by:</label>
+      <input class="form-control" required [(ngModel)]="dataValue.createdBy" name="createdBy"
+             #createdBy="ngModel"
+             placeholder="your name"
+             id="dataValueCreatedBy">
+      <div *ngIf="createdBy.invalid && (createdBy.dirty || createdBy.touched)"
+           class="alert alert-danger">
+        Information about the creator of the data value is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="dataValueType">Data type:</label>
+      <input class="form-control" required [(ngModel)]="dataValue.type" name="type" #type="ngModel"
+             list="types"
+             placeholder="type of the data value" id="dataValueType">
+      <datalist id="types">
+        <option value="binary">
+        <option value="string">
+        <option value="integer">
+        <option value="boolean">
+      </datalist>
+      <div *ngIf="type.invalid && (type.dirty || type.touched)"
+           class="alert alert-danger">
+        A type is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="dataValueContentType">Content type:</label>
+      <input class="form-control" [(ngModel)]="dataValue.contentType" name="contentType" #contentType="ngModel"
+             list="mediaTypes" placeholder="optional media-type, only required if type 'binary' is used"
+             id="dataValueContentType">
+      <datalist id="mediaTypes">
+        <option value="text/plain">
+        <option value="application/xml">
+        <option value="image/png">
+        <option value="video/mp4">
+        <option value="text/csv">
+        <option value="image/jpeg">
+        <option value="application/pdf">
+      </datalist>
+      <div *ngIf="dataValueForm.errors?.missingContentType && (dataValueForm.touched || dataValueForm.dirty)"
+           class="cross-validation-error-message alert alert-danger">
+        If type 'binary' is selected, a content type needs to be specified.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="dataValueForm.invalid" (click)="submitDataValue()">
+      Submit
+    </button>
+    <button type="button" class="btn btn-default" (click)="newDataValue(); dataValueForm.resetForm({})">Reset</button>
+  </div>
+</form>
+
+<br>
+<a class="btn btn-info" routerLink="/data/dataValues" role="button">Cancel</a>

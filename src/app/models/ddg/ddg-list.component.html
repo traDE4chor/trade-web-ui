@@ -1,0 +1,45 @@
+<h1 class="page-header">Data Dependency Graphs</h1>
+
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Entity</th>
+      <th>Target Namespace</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr
+      *ngFor="let ddgWithLinks of dataDependencyGraphArray; trackBy:trackByDDG">
+      <td><a [routerLink]="['/models/ddgs', ddgWithLinks.dataDependencyGraph.id]">{{ddgWithLinks
+        .dataDependencyGraph.name}}</a></td>
+      <td>{{ddgWithLinks.dataDependencyGraph.entity}}</td>
+      <td>{{ddgWithLinks.dataDependencyGraph.targetNamespace}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<nav aria-label="DDG list pages" class="navbar navbar-light bg-light">
+  <ul class="pagination">
+    <li class="page-item">
+      <span class="page-link">Previous</span>
+    </li>
+    <input class="page-item" [(ngModel)]="pagination_size" name="size" list="sizes" id="paginationSize">
+    <datalist id="sizes">
+      <option value="5">
+      <option value="10">
+      <option value="25">
+      <option value="50">
+    </datalist>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
+
+<div class="btn-group" role="group" aria-label="Create or cancel">
+  <a class="btn btn-info" routerLink="/models" role="button">Back</a>
+  <a class="btn btn-primary" routerLink="/models/ddgs?create" role="button">Create</a>
+</div>

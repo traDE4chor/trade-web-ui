@@ -21,11 +21,12 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "src/scss/app.scss"
+              "src/scss/app.scss",
+              "node_modules/font-awesome/scss/font-awesome.scss",
+              "node_modules/bootstrap/scss/bootstrap.scss"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js"
+              "node_modules/jquery/dist/jquery.min.js"
             ]
           },
           "configurations": {
@@ -74,11 +75,12 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js"
+              "node_modules/jquery/dist/jquery.min.js"
             ],
             "styles": [
-              "src/scss/app.scss"
+              "src/scss/app.scss",
+              "node_modules/font-awesome/scss/font-awesome.scss",
+              "node_modules/bootstrap/scss/bootstrap.scss"
             ],
             "assets": [
               "src/assets",

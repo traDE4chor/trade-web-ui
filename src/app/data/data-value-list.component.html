@@ -1,44 +1,34 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
-      <ul class="nav nav-sidebar">
-        <li><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-        <li><a routerLink="/models">Models</a></li>
-        <li><a routerLink="/instances">Instances</a></li>
-        <li class="active"><a routerLink="/data">Data</a></li>
-        <li><a routerLink="/notifications">Notifications</a></li>
-      </ul>
-      <img class="trade-icon image-responsive" src="../assets/trade-logo.png"/>
-    </div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-      <h1 class="page-header">Data Values</h1>
+<h1 class="page-header">Data Values</h1>
 
-      <div class="table-responsive">
-        <table class="table table-striped table-hover">
-          <thead>
-          <tr>
-            <th>Name</th>
-            <th>Created by</th>
-            <th>Type</th>
-            <th>Content Type</th>
-            <th>Status</th>
-            <th>Last Modified</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr
-            *ngFor="let dataValueWithLinks of dataValuesArray.dataValues; trackBy: trackByDataValues"
-              [class.bg-info]="dataValueWithLinks.dataValue.id == selectedId">
-            <td><a [routerLink]="['/data/dataValues', dataValueWithLinks.dataValue.id]">{{dataValueWithLinks.dataValue.name}}</a></td>
-            <td>{{dataValueWithLinks.dataValue.createdBy}}</td>
-            <td>{{dataValueWithLinks.dataValue.type}}</td>
-            <td>{{dataValueWithLinks.dataValue.contentType}}</td>
-            <td>{{dataValueWithLinks.dataValue.status}}</td>
-            <td>{{dataValueWithLinks.dataValue.lastModified | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Created by</th>
+      <th>Type</th>
+      <th>Content Type</th>
+      <th>Status</th>
+      <th>Last Modified</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr
+      *ngFor="let dataValueWithLinks of dataValuesArray; trackBy:trackByDataValues">
+      <td><a
+        [routerLink]="['/data/dataValues', dataValueWithLinks.dataValue.id]">{{dataValueWithLinks.dataValue.name}}</a>
+      </td>
+      <td>{{dataValueWithLinks.dataValue.createdBy}}</td>
+      <td>{{dataValueWithLinks.dataValue.type}}</td>
+      <td>{{dataValueWithLinks.dataValue.contentType}}</td>
+      <td>{{dataValueWithLinks.dataValue.status}}</td>
+      <td>{{dataValueWithLinks.dataValue.lastModified | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="btn-group" role="group" aria-label="Create or cancel">
+  <a class="btn btn-info" routerLink="/data" role="button">Back</a>
+  <a class="btn btn-primary" routerLink="/data/dataValues?create" role="button">Create</a>
 </div>
