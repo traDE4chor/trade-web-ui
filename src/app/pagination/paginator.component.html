@@ -1,0 +1,7 @@
+<div class="pagination" *ngIf="page">
+  <button class="mr-2" (click)="pageChange.emit(page.previous)" [disabled]="!page.previous">&lsaquo;</button>
+  <span class="text-primary">
+    {{ page.start }} - {{page.start + page.size - 1}}
+  </span>
+  <button class="ml-2" (click)="pageChange.emit(page.next)" [disabled]="!page.next">&rsaquo;</button>
+</div>
