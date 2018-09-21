@@ -10,8 +10,6 @@ import {
 } from "../../trade-client";
 import {HttpClient} from "@angular/common/http";
 import {startWith, switchMap} from "rxjs/operators";
-import {getDataObjectId} from "../model-utils";
-
 
 @Component({
   selector: 'data-element-list',
@@ -53,7 +51,4 @@ export class DataElementListComponent implements OnInit {
     return queryPaginated<DataElementArrayWithLinks, DataElementArray>(this.http, url, 'dataElements');
   }
 
-  resolveDataObjectId(dataElementLinks: LinkArray) {
-    return getDataObjectId(dataElementLinks);
-  }
 }

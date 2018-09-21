@@ -20,7 +20,7 @@
         .dataElement.name}}</a></td>
       <td>{{elementsWithLinks.dataElement.entity}}</td>
       <td><a
-        [routerLink]="['/models/dataObjects', resolveDataObjectId(elementsWithLinks.links)]">{{elementsWithLinks.dataElement
+        [routerLink]="['/models/dataObjects', elementsWithLinks.links | resolveResourceId : 'dataObject']">{{elementsWithLinks.dataElement
         .dataObjectName}}</a></td>
       <td>{{elementsWithLinks.dataElement.type}}</td>
       <td>{{elementsWithLinks.dataElement.contentType}}</td>

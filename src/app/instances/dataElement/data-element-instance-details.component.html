@@ -1,0 +1,46 @@
+<div *ngIf="dataElementInstance$ | async as dataElement">
+  <h1>Data Element Instance: "{{ dataElement.instance.id }}"</h1>
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <tbody>
+      <tr>
+        <th scope="row" style="width: 20%">Id</th>
+        <td>{{dataElement.instance.id }}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">HREF</th>
+        <td><a href="{{ dataElement.instance.href }}">{{ dataElement.instance.href }}</a></td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Created by</th>
+        <td>{{ dataElement.instance.createdBy }}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Data Element Name</th>
+        <td><a
+          [routerLink]="['/models/dataElements', dataElement.links | resolveResourceId : 'dataElement']">{{dataElement.instance
+          .dataElementName}}</a></td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Status</th>
+        <td>{{ dataElement.instance.status}}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Correlation Properties</th>
+        <td>
+          <div *ngFor="let correlation of dataElement.instance.correlationProperties">
+            [{{ correlation.key }} &#8614; {{correlation.value}}]
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Number of data values</th>
+        <td>{{ dataElement.instance.numberOfDataValues}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <a class="btn btn-info" routerLink="/instances/dataElements" role="button">Back</a>
+</div>

@@ -1,0 +1,34 @@
+<h1 class="page-header">Data Object Instances</h1>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Data Object Name</th>
+      <th>Created by</th>
+      <th>Correlation properties</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let dataObjectsWithLinks of (page | async)?.results; trackBy:trackByDataObjectInstance">
+      <td><a [routerLink]="['/instances/dataObjects', dataObjectsWithLinks.instance.id]">{{dataObjectsWithLinks.instance.id}}</a></td>
+      <td><a
+        [routerLink]="['/models/dataObjects', dataObjectsWithLinks.links | resolveResourceId : 'dataObject']">
+        {{dataObjectsWithLinks.instance.dataObjectName}}</a></td>
+      <td>{{dataObjectsWithLinks.instance.createdBy}}</td>
+      <td>
+          <div *ngFor="let correlation of dataObjectsWithLinks.instance.correlationProperties">
+            {{ correlation.key }} &#8614; {{correlation.value}}
+          </div>
+      </td>
+      <td>{{dataObjectsWithLinks.instance.status}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-paginator [page]="page | async" (pageChange)="onPageChanged($event)"></app-paginator>
+
+<a class="btn btn-info" routerLink="/instances" role="button">Back</a>

@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {DataObjectService, DataObjectWithLinks, LinkArray} from "../../trade-client";
+import {DataObjectService, DataObjectWithLinks} from "../../trade-client";
 import {Observable} from "rxjs";
 import {switchMap} from "rxjs/operators";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
-import {getDataModelId} from "../model-utils";
 
 @Component({
   selector: 'data-object-details',
@@ -30,7 +29,4 @@ export class DataObjectDetailsComponent implements OnInit {
   ngOnInit() {
   }
 
-  resolveDataModelId(dataObjectLinks: LinkArray) {
-    return getDataModelId(dataObjectLinks);
-  }
 }

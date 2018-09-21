@@ -63,7 +63,7 @@ export class DataValueService {
 
     /**
      * Creates and adds a new data value to the TraDE middleware
-     *
+     * 
      * @param dataValueData The name, type and who created the data value are required. The specification of a contentType is only required if the data type is binary.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -109,7 +109,7 @@ export class DataValueService {
 
     /**
      * Creates a new or associates an existing dataValue to the data element instance.
-     *
+     * 
      * @param instanceId Id of the data element instance that needs to be fetched
      * @param dataValueData DataValue object that needs to be created or associated. In case of updating the associated data value providing the Id is enough. To create and associate a new DataValue, a name, type and who created the data value are required. The specification of a contentType is only required if the data type of the data value is binary.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -197,7 +197,7 @@ export class DataValueService {
 
     /**
      * Find a data value by Id
-     *
+     * 
      * @param dataValueId Id of the data value that needs to be fetched
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -285,7 +285,7 @@ export class DataValueService {
     }
 
     /**
-     *
+     * 
      * Gets all available &#x60;DataValue&#x60; resources. Optional query parameter of **start** and **size** enable pagination of the collection of data value resources, param **createdBy** filters result list by the creator and param **status** filters result list by status of the data values.
      * @param start Start index of returned collection of resources for pagination.
      * @param size Size of the returned sub-collection of resources for pagination.
@@ -342,7 +342,7 @@ export class DataValueService {
 
     /**
      * Pulls data from the data value identified by Id
-     *
+     * 
      * @param dataValueId Id of the data value that needs to be fetched
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -384,7 +384,7 @@ export class DataValueService {
 
     /**
      * Pushes data to the TraDE middleware by attaching it to the data value identified by Id
-     *
+     * 
      * @param dataValueId Id of the data value to attach data to
      * @param data The data to push. It can be either provided directly in binary format (byte[]) or referenced through a link (http://example.org/data) where the data can be retrieved. If a link is passed, the **X-ResolveAsLinkToData** header should be set to true, to trigger the resolution of the link, else the link itself will be perceived as the data to be stored.
      * @param xResolveAsLinkToData Whether the body contains the actual data (false) or a link to the data (true).
@@ -442,7 +442,7 @@ export class DataValueService {
 
     /**
      * Removes an associated dataValue from a data element instance.
-     *
+     * 
      * @param instanceId Id of the data element instance that needs to be fetched
      * @param dataValueId The id of the DataValue object that is associated and should be remove from the data element instance.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -487,7 +487,7 @@ export class DataValueService {
 
     /**
      * Update an existing data value
-     *
+     * 
      * @param dataValueId Id of the data value that needs to be fetched
      * @param dataValue The updated data value resource. Only changes to the following fields are reflected **name**, **type** and **contentType**. All other changes are ignored since the corresponding fields of the resource are internally set by the server or are immutable.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.

@@ -20,6 +20,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {ApiModule} from './trade-client/api.module';
 
 import {AppComponent} from './app.component';
+import { ResolveResourceIdPipe } from './pipes/resolve-resource-id.pipe';
 
 @NgModule({
   declarations: [

@@ -15,6 +15,7 @@ import {DataObjectListComponent} from './dataObject/data-object-list.component';
 import {DataObjectDetailsComponent} from './dataObject/data-object-details.component';
 import {DataElementListComponent} from "./dataElement/data-element-list.component";
 import {DataElementDetailsComponent} from "./dataElement/data-element-details.component";
+import {CustomPipesModule} from "../pipes/pipes.module";
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import {DataElementDetailsComponent} from "./dataElement/data-element-details.co
     FormsModule,
     ModelRoutingModule,
     FileUploadModule,
-    PaginationModule
+    PaginationModule,
+    CustomPipesModule
   ],
   declarations: [
     ModelsOverviewComponent,

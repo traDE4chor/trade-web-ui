@@ -1,0 +1,45 @@
+<div *ngIf="dataObjectInstance$ | async as dataObject">
+  <h1>Data Object Instance: "{{ dataObject.instance.id }}"</h1>
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <tbody>
+      <tr>
+        <th scope="row" style="width: 20%">Id</th>
+        <td>{{dataObject.instance.id }}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">HREF</th>
+        <td><a href="{{ dataObject.instance.href }}">{{ dataObject.instance.href }}</a></td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Created by</th>
+        <td>{{ dataObject.instance.createdBy }}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Data Object Name</th>
+        <td><a
+          [routerLink]="['/models/dataObjects', dataObject.links | resolveResourceId : 'dataObject']">{{dataObject.instance
+          .dataObjectName}}</a></td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Status</th>
+        <td>{{ dataObject.instance.status}}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Correlation Properties</th>
+        <td>
+            <div *ngFor="let correlation of dataObject.instance.correlationProperties">
+              [{{ correlation.key }} &#8614; {{correlation.value}}]
+            </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <data-element-instance-list *ngIf="dataObjectInstance$ | async as currentDO" [dataObjectInstance]="currentDO"
+                              [dataObjectMode]="true"></data-element-instance-list>
+
+  <a class="btn btn-info" routerLink="/instances/dataObjects" role="button">Back</a>
+</div>

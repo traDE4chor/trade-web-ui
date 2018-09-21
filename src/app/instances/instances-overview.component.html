@@ -1,10 +1,51 @@
 <h1 class="page-header">Instances Overview</h1>
 
-<h2 class="sub-header">Notifier Services</h2>
-<div class="grid grid-pad">
-  <div *ngFor="let service of notifierServiceArray" class="col-1-4">
-    <div>
-      <h4>{{service.id}} : {{service.href}}</h4>
-    </div>
-  </div>
+<div class="sub-header headline-with-image">
+  <img class="headline-image"
+       src="../assets/trade-data-object-instance-icon.png" alt="Data Object Instances">
+  <h2 class="headline-text">Data Object Instances</h2>
 </div>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Data Object Name</th>
+      <th>Created by</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let dataObjectsWithLinks of dataObjectInstanceArray">
+      <td>{{dataObjectsWithLinks.instance.dataObjectName}}</td>
+      <td>{{dataObjectsWithLinks.instance.createdBy}}</td>
+      <td>{{dataObjectsWithLinks.instance.status}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<a class="btn btn-info" routerLink="/instances/dataObjects" role="button">List of data object instances</a>
+
+<div class="sub-header headline-with-image">
+  <img class="headline-image"
+       src="../assets/trade-data-element-instance-icon.png" alt="Data Element Instances">
+  <h2 class="headline-text">Data Element Instances</h2>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Data Element Name</th>
+      <th>Created by</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let dataElementsWithLinks of dataElementInstanceArray">
+      <td>{{dataElementsWithLinks.instance.dataElementName}}</td>
+      <td>{{dataElementsWithLinks.instance.createdBy}}</td>
+      <td>{{dataElementsWithLinks.instance.status}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<a class="btn btn-info" routerLink="/instances/dataElements" role="button">List of data element instances</a>

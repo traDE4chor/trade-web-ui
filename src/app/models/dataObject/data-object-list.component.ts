@@ -4,7 +4,6 @@ import {Page, queryPaginated} from "../../pagination/pagination-page";
 import {BASE_PATH, DataObjectArray, DataObjectArrayWithLinks, DataObjectWithLinks, LinkArray} from "../../trade-client";
 import {HttpClient} from "@angular/common/http";
 import {startWith, switchMap} from "rxjs/operators";
-import {getDataModelId} from "../model-utils";
 
 @Component({
   selector: 'data-object-list',
@@ -36,7 +35,4 @@ export class DataObjectListComponent implements OnInit {
     return queryPaginated<DataObjectArrayWithLinks, DataObjectArray>(this.http, url, 'dataObjects');
   }
 
-  resolveDataModelId(dataObjectLinks: LinkArray) {
-    return getDataModelId(dataObjectLinks);
-  }
 }

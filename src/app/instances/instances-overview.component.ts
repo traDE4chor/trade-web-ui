@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-
-import { NotifierServiceArray } from '../trade-client/model/notifierServiceArray';
-import { NotifierServiceService } from '../trade-client/api/notifierService.service';
+import {Component, OnInit} from '@angular/core';
+import {
+  DataElementInstanceArray,
+  DataElementInstanceService,
+  DataObjectInstanceArray,
+  DataObjectInstanceService
+} from "../trade-client";
 
 @Component({
   selector: 'instances',
@@ -9,13 +12,21 @@ import { NotifierServiceService } from '../trade-client/api/notifierService.serv
 })
 export class InstancesOverviewComponent implements OnInit {
 
-  notifierServiceArray: NotifierServiceArray;
+  dataObjectInstanceArray: DataObjectInstanceArray;
 
-  constructor(private notifierService: NotifierServiceService) { }
+  dataElementInstanceArray: DataElementInstanceArray;
 
-  ngOnInit(): void {
-    this.notifierService.getNotifierServices().subscribe(result => this
-    .notifierServiceArray = result.notifierServices, error => console.error('An error occurred', error));
+  startIndex: number = 1;
+  size: number = 5;
+
+  constructor(private dataObjectInstanceApi: DataObjectInstanceService, private dataElementInstanceApi: DataElementInstanceService) {
   }
 
+  ngOnInit(): void {
+    this.dataObjectInstanceApi.getAllDataObjectInstances(this.startIndex, this.size).subscribe(result => this
+      .dataObjectInstanceArray = result.instances, error => console.error('An error occurred', error));
+
+    this.dataElementInstanceApi.getAllDataElementInstances(this.startIndex, this.size).subscribe(result => this
+      .dataElementInstanceArray = result.instances, error => console.error('An error occurred', error));
+  }
 }

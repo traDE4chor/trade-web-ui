@@ -153,6 +153,58 @@ export class DataObjectInstanceService {
     }
 
     /**
+     * 
+     * Gets all available &#x60;DataObjectInstance&#x60; resources. Optional query parameter of **start** and **size** enable pagination of the collection of data object instance resources and param **status** filters result list by status of the data object instances.
+     * @param start Start index of returned collection of resources for pagination.
+     * @param size Size of the returned sub-collection of resources for pagination.
+     * @param status Status of data object instances to return
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllDataObjectInstances(start?: number, size?: number, status?: string, observe?: 'body', reportProgress?: boolean): Observable<DataObjectInstanceArrayWithLinks>;
+    public getAllDataObjectInstances(start?: number, size?: number, status?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<DataObjectInstanceArrayWithLinks>>;
+    public getAllDataObjectInstances(start?: number, size?: number, status?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<DataObjectInstanceArrayWithLinks>>;
+    public getAllDataObjectInstances(start?: number, size?: number, status?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (start !== undefined) {
+            queryParameters = queryParameters.set('start', <any>start);
+        }
+        if (size !== undefined) {
+            queryParameters = queryParameters.set('size', <any>size);
+        }
+        if (status !== undefined) {
+            queryParameters = queryParameters.set('status', <any>status);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<DataObjectInstanceArrayWithLinks>(`${this.basePath}/dataObjectInstances`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Find a data object instance by Id
      * 
      * @param instanceId Id of the data object instance that needs to be fetched

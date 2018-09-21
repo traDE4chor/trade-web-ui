@@ -27,7 +27,7 @@
       <tr>
         <th scope="row" style="width: 20%">Data Object Name</th>
         <td><a
-          [routerLink]="['/models/dataObjects', resolveDataObjectId(dataElement.links)]">{{dataElement.dataElement
+          [routerLink]="['/models/dataObjects', dataElement.links | resolveResourceId : 'dataObject']">{{dataElement.dataElement
           .dataObjectName}}</a></td>
       </tr>
       <tr>

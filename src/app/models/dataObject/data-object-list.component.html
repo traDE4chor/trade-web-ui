@@ -17,7 +17,7 @@
         .dataObject.name}}</a></td>
       <td>{{objectsWithLinks.dataObject.entity}}</td>
       <td><a
-        [routerLink]="['/models/dataModels', resolveDataModelId(objectsWithLinks.links)]">{{objectsWithLinks.dataObject
+        [routerLink]="['/models/dataModels', objectsWithLinks.links | resolveResourceId : 'dataModel']">{{objectsWithLinks.dataObject
         .dataModelName}}</a></td>
       <td>{{objectsWithLinks.dataObject.status}}</td>
     </tr>

@@ -27,7 +27,7 @@
       <tr>
         <th scope="row" style="width: 20%">Data Model Name</th>
         <td><a
-          [routerLink]="['/models/dataModels', resolveDataModelId(dataObject.links)]">{{dataObject.dataObject
+          [routerLink]="['/models/dataModels', dataObject.links | resolveResourceId : 'dataModel']">{{dataObject.dataObject
           .dataModelName}}</a></td>
       </tr>
       </tbody>

@@ -3,7 +3,6 @@ import {Observable} from "rxjs";
 import {DataElementService, DataElementWithLinks, LinkArray} from "../../trade-client";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {switchMap} from "rxjs/operators";
-import {getDataObjectId} from "../model-utils";
 
 @Component({
   selector: 'data-element-details',
@@ -28,9 +27,5 @@ export class DataElementDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  resolveDataObjectId(dataElementLinks: LinkArray) {
-    return getDataObjectId(dataElementLinks);
   }
 }
