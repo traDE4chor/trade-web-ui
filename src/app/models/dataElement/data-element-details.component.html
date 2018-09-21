@@ -1,0 +1,50 @@
+<div *ngIf="dataElement$ | async as dataElement">
+  <h1>Data Element: "{{ dataElement.dataElement.name }}"</h1>
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <tbody>
+      <tr>
+        <th scope="row" style="width: 20%">Id</th>
+        <td>{{dataElement.dataElement.id }}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">HREF</th>
+        <td><a href="{{ dataElement.dataElement.href }}">{{ dataElement.dataElement.href }}</a></td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Name</th>
+        <td>{{ dataElement.dataElement.name }}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Entity</th>
+        <td>{{ dataElement.dataElement.entity }}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Status</th>
+        <td>{{ dataElement.dataElement.status}}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Data Object Name</th>
+        <td><a
+          [routerLink]="['/models/dataObjects', resolveDataObjectId(dataElement.links)]">{{dataElement.dataElement
+          .dataObjectName}}</a></td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Type</th>
+        <td>{{ dataElement.dataElement.type}}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Content Type</th>
+        <td>{{ dataElement.dataElement.contentType}}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">isCollection</th>
+        <td>{{ dataElement.dataElement.isCollectionElement}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <a class="btn btn-info" routerLink="/models/dataElements" role="button">Back</a>
+</div>

@@ -1,0 +1,41 @@
+<div *ngIf="dataObject$ | async as dataObject">
+  <h1>Data Object: "{{ dataObject.dataObject.name }}"</h1>
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <tbody>
+      <tr>
+        <th scope="row" style="width: 20%">Id</th>
+        <td>{{dataObject.dataObject.id }}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">HREF</th>
+        <td><a href="{{ dataObject.dataObject.href }}">{{ dataObject.dataObject.href }}</a></td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Name</th>
+        <td>{{ dataObject.dataObject.name }}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Entity</th>
+        <td>{{ dataObject.dataObject.entity }}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Status</th>
+        <td>{{ dataObject.dataObject.status}}</td>
+      </tr>
+      <tr>
+        <th scope="row" style="width: 20%">Data Model Name</th>
+        <td><a
+          [routerLink]="['/models/dataModels', resolveDataModelId(dataObject.links)]">{{dataObject.dataObject
+          .dataModelName}}</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <data-element-list *ngIf="dataObject$ | async as currentDO" [dataObject]="currentDO"
+                     [dataObjectMode]="true"></data-element-list>
+
+  <a class="btn btn-info" routerLink="/models/dataObjects" role="button">Back</a>
+</div>

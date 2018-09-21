@@ -1,0 +1,30 @@
+<h1 class="page-header">Data Objects</h1>
+
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Entity</th>
+      <th>Data Model Name</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr
+      *ngFor="let objectsWithLinks of (page | async)?.results; trackBy:trackByDataObject">
+      <td><a [routerLink]="['/models/dataObjects', objectsWithLinks.dataObject.id]">{{objectsWithLinks
+        .dataObject.name}}</a></td>
+      <td>{{objectsWithLinks.dataObject.entity}}</td>
+      <td><a
+        [routerLink]="['/models/dataModels', resolveDataModelId(objectsWithLinks.links)]">{{objectsWithLinks.dataObject
+        .dataModelName}}</a></td>
+      <td>{{objectsWithLinks.dataObject.status}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-paginator [page]="page | async" (pageChange)="onPageChanged($event)"></app-paginator>
+
+<a class="btn btn-info" routerLink="/models" role="button">Back</a>

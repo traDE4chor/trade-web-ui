@@ -1,0 +1,36 @@
+<h1 class="page-header">Data Elements</h1>
+
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Entity</th>
+      <th>Data Object Name</th>
+      <th>Type</th>
+      <th>Content Type</th>
+      <th>Status</th>
+      <th>isCollection</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr
+      *ngFor="let elementsWithLinks of (page | async)?.results; trackBy:trackByDataElement">
+      <td><a [routerLink]="['/models/dataElements', elementsWithLinks.dataElement.id]">{{elementsWithLinks
+        .dataElement.name}}</a></td>
+      <td>{{elementsWithLinks.dataElement.entity}}</td>
+      <td><a
+        [routerLink]="['/models/dataObjects', resolveDataObjectId(elementsWithLinks.links)]">{{elementsWithLinks.dataElement
+        .dataObjectName}}</a></td>
+      <td>{{elementsWithLinks.dataElement.type}}</td>
+      <td>{{elementsWithLinks.dataElement.contentType}}</td>
+      <td>{{elementsWithLinks.dataElement.status}}</td>
+      <td>{{elementsWithLinks.dataElement.isCollectionElement}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-paginator [page]="page | async" (pageChange)="onPageChanged($event)"></app-paginator>
+
+<a *ngIf="!dataObjectMode" class="btn btn-info" routerLink="/models" role="button">Back</a>

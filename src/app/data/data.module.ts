@@ -14,13 +14,16 @@ import {PdfViewerModule} from 'ng2-pdf-viewer';
 
 import {DataRoutingModule} from './data-routing.module';
 
+import {PaginationModule} from "../pagination/pagination.module";
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     DataRoutingModule,
     PdfViewerModule,
-    FileUploadModule
+    FileUploadModule,
+    PaginationModule
   ],
   declarations: [
     DataOverviewComponent,

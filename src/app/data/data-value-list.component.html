@@ -14,7 +14,7 @@
     </thead>
     <tbody>
     <tr
-      *ngFor="let dataValueWithLinks of dataValuesArray; trackBy:trackByDataValues">
+      *ngFor="let dataValueWithLinks of (page | async)?.results; trackBy:trackByDataValues">
       <td><a
         [routerLink]="['/data/dataValues', dataValueWithLinks.dataValue.id]">{{dataValueWithLinks.dataValue.name}}</a>
       </td>
@@ -27,6 +27,8 @@
     </tbody>
   </table>
 </div>
+
+<app-paginator [page]="page | async" (pageChange)="onPageChanged($event)"></app-paginator>
 
 <div class="btn-group" role="group" aria-label="Create or cancel">
   <a class="btn btn-info" routerLink="/data" role="button">Back</a>

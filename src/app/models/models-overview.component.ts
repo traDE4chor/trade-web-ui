@@ -20,17 +20,20 @@ export class ModelsOverviewComponent implements OnInit {
 
   dataElementArray: DataElementArray;
 
+  startIndex: number = 1;
+  size: number = 5;
+
   constructor(private ddgApi: DataDependencyGraphService, private dataObjectApi: DataObjectService, private dataElementApi: DataElementService) {
   }
 
   ngOnInit(): void {
-    this.ddgApi.getDataDependencyGraphs(1, 10).subscribe(result => this
+    this.ddgApi.getDataDependencyGraphs(this.startIndex, this.size).subscribe(result => this
       .dataDependencyGraphArray = result.dataDependencyGraphs, error => console.error('An error occurred', error));
 
-    this.dataObjectApi.getAllDataObjects(1, 10).subscribe(result => this
+    this.dataObjectApi.getAllDataObjects(this.startIndex, this.size).subscribe(result => this
       .dataObjectArray = result.dataObjects, error => console.error('An error occurred', error));
 
-    this.dataElementApi.getAllDataElements(1, 10).subscribe(result => this
+    this.dataElementApi.getAllDataElements(this.startIndex, this.size).subscribe(result => this
       .dataElementArray = result.dataElements, error => console.error('An error occurred', error));
   }
 

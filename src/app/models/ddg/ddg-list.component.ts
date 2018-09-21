@@ -8,7 +8,7 @@ import {DataDependencyGraphService} from '../../trade-client/api/dataDependencyG
 
 import {Page, queryPaginated} from '../../pagination/pagination-page';
 import {BASE_PATH, DataDependencyGraphArrayWithLinks} from "../../trade-client";
-import {debounceTime, share, startWith, switchMap} from "rxjs/operators";
+import {startWith, switchMap} from "rxjs/operators";
 
 @Component({
   selector: 'ddg-list',
