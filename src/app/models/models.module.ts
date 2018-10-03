@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FileUploadModule} from 'ng2-file-upload';
 
 import {ModelsOverviewComponent} from './models-overview.component';
@@ -21,6 +21,7 @@ import {CustomPipesModule} from "../pipes/pipes.module";
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     ModelRoutingModule,
     FileUploadModule,
     PaginationModule,

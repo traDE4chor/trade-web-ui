@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {InstancesOverviewComponent} from './instances-overview.component';
 
@@ -16,6 +16,7 @@ import {CustomPipesModule} from "../pipes/pipes.module";
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     InstanceRoutingModule,
     PaginationModule,
     CustomPipesModule

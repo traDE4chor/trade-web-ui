@@ -162,6 +162,23 @@ h1 {
 }
 
 /*
+* Searchbar styles
+ */
+.search-bar {
+  display: flex;
+  margin: 16px 0;
+}
+
+.search-bar input {
+  flex: 1;
+  line-height: 25px;
+}
+
+.search-bar select {
+  line-height: 25px;
+}
+
+/*
  * Font awesome styles
  */
 

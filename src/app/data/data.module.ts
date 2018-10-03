@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FileUploadModule} from 'ng2-file-upload';
 
 import {DataOverviewComponent} from './data-overview.component';
@@ -20,6 +20,7 @@ import {PaginationModule} from "../pagination/pagination.module";
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     DataRoutingModule,
     PdfViewerModule,
     FileUploadModule,

@@ -13,14 +13,14 @@ import {ModelsModule} from './models/models.module';
 import {NotificationsModule} from './notifications/notifications.module';
 import {TransformationsModule} from './transformations/transformations.module';
 
-import {BASE_PATH} from './trade-client/variables';
+import {TRADE_BASE_PATH} from './trade-client/variables';
 import {environment} from '../environments/environment';
 
 import {HttpClientModule} from '@angular/common/http';
-import {ApiModule} from './trade-client/api.module';
+import {TraDeApiModule} from './trade-client/api.module';
 
 import {AppComponent} from './app.component';
-import { ResolveResourceIdPipe } from './pipes/resolve-resource-id.pipe';
+import {HDT_BASE_PATH, HDTAppsApiModule} from "./hdtapps-client";
 
 @NgModule({
   declarations: [
@@ -37,13 +37,15 @@ import { ResolveResourceIdPipe } from './pipes/resolve-resource-id.pipe';
     NotificationsModule,
     TransformationsModule,
     HttpClientModule,
-    ApiModule,
+    TraDeApiModule,
+    HDTAppsApiModule,
     AppRoutingModule,
     UiModule,
     AngularFontAwesomeModule
   ],
   providers: [
-    {provide: BASE_PATH, useValue: environment.API_BASE_PATH}
+    {provide: TRADE_BASE_PATH, useValue: environment.TRADE_API_BASE_PATH},
+    {provide: HDT_BASE_PATH, useValue: environment.HDT_API_BASE_PATH}
   ],
   bootstrap: [AppComponent]
 })

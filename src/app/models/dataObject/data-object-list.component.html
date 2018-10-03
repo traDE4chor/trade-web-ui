@@ -1,5 +1,16 @@
 <h1 class="page-header">Data Objects</h1>
 
+<div [formGroup]="filterForm">
+  <div class="search-bar">
+    <select formControlName="queryParameter" [value]="'name'">
+      <option [value]="'name'">name</option>
+      <option [value]="'entity'">entity</option>
+      <option [value]="'status'">status</option>
+    </select>
+    <input formControlName="search" placeholder="Search by selected parameter">
+  </div>
+</div>
+
 <div class="table-responsive">
   <table class="table table-hover">
     <thead>

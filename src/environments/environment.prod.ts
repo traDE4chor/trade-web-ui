@@ -1,4 +1,7 @@
+import config from "../../config/config.json";
+
 export const environment = {
   production: true,
-  API_BASE_PATH: 'http://localhost:8081/api'
+  TRADE_API_BASE_PATH: config.TraDE_URL,
+  HDT_API_BASE_PATH: config.HDT_URL
 };

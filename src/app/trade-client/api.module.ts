@@ -30,15 +30,15 @@ import { ResourceEventFilterService } from './api/resourceEventFilter.service';
     NotifierServiceService,
     ResourceEventFilterService ]
 })
-export class ApiModule {
+export class TraDeApiModule {
     public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders {
         return {
-            ngModule: ApiModule,
+            ngModule: TraDeApiModule,
             providers: [ { provide: Configuration, useFactory: configurationFactory } ]
         }
     }
 
-    constructor( @Optional() @SkipSelf() parentModule: ApiModule) {
+    constructor( @Optional() @SkipSelf() parentModule: TraDeApiModule) {
         if (parentModule) {
             throw new Error('ApiModule is already loaded. Import your base AppModule only.');
         }

@@ -1,4 +1,4 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from "rxjs/operators";
 import {LinkArray} from '../trade-client/model/linkArray';
@@ -11,8 +11,22 @@ export class Page<T> {
   results: T;        // items of the current page
 }
 
-export function queryPaginated<S, T>(http: HttpClient, pageUrl: string, property: string): Observable<Page<T>> {
-  return http.get<S>(pageUrl).pipe(map(result => {
+export function queryPaginated<S, T>(http: HttpClient, basePath: string, property: string, urlOrFilter?: string | object): Observable<Page<T>> {
+  let params = new HttpParams();
+  let pageUrl = basePath;
+
+  if (typeof urlOrFilter === 'string') {
+    pageUrl = urlOrFilter;
+  } else if (typeof urlOrFilter === 'object') {
+    Object.keys(urlOrFilter).sort().forEach(key => {
+      const value = urlOrFilter[key];
+      if (value !== null) {
+        params = params.set(key, value.toString());
+      }
+    });
+  }
+
+  return http.get<S>(pageUrl, {params}).pipe(map(result => {
     let page = new Page<T>();
 
     let links: LinkArray;

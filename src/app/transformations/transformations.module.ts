@@ -1,16 +1,16 @@
-import { NgModule }       from '@angular/core';
-import { CommonModule }   from '@angular/common';
-import { FormsModule }    from '@angular/forms';
-import { ApiModule } from '../trade-client/api.module';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import { TransformationsOverviewComponent } from './transformations-overview.component';
+import {TransformationsOverviewComponent} from './transformations-overview.component';
 
-import { TransformationsRoutingModule } from './transformations-routing.module';
+import {TransformationsRoutingModule} from './transformations-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     TransformationsRoutingModule
   ],
   declarations: [

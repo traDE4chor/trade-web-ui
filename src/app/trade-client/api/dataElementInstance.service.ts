@@ -24,7 +24,7 @@ import { DataElementInstanceWithLinks } from '../model/dataElementInstanceWithLi
 import { InvalidInput } from '../model/invalidInput';
 import { NotFound } from '../model/notFound';
 
-import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
+import { TRADE_BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
@@ -35,7 +35,7 @@ export class DataElementInstanceService {
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
-    constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+    constructor(protected httpClient: HttpClient, @Optional()@Inject(TRADE_BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
             this.basePath = basePath;
         }
