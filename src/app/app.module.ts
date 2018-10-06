@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {UiModule} from './ui/ui.module';
 import {DashboardComponent} from './dashboard/dashboard.component';
@@ -20,7 +20,23 @@ import {HttpClientModule} from '@angular/common/http';
 import {TraDeApiModule} from './trade-client/api.module';
 
 import {AppComponent} from './app.component';
+import {AppConfigService} from './services/app-config.service';
 import {HDT_BASE_PATH, HDTAppsApiModule} from "./hdtapps-client";
+
+const appInitializerFn = (appConfig: AppConfigService) => {
+  return () => {
+    return appConfig.loadAppConfig();
+  };
+};
+
+const getHdtBasePath = (appConfig: AppConfigService) => {
+  return appConfig.getConfig()['HDT_API_BASE_PATH'];
+};
+
+const getTradeBasePath = (appConfig: AppConfigService) => {
+  return appConfig.getConfig()['TRADE_API_BASE_PATH'];
+};
+
 
 @NgModule({
   declarations: [
@@ -44,10 +60,24 @@ import {HDT_BASE_PATH, HDTAppsApiModule} from "./hdtapps-client";
     AngularFontAwesomeModule
   ],
   providers: [
-    {provide: TRADE_BASE_PATH, useValue: environment.TRADE_API_BASE_PATH},
-    {provide: HDT_BASE_PATH, useValue: environment.HDT_API_BASE_PATH}
+    {
+      provide: TRADE_BASE_PATH, useFactory: getTradeBasePath,
+      deps: [AppConfigService]
+    },
+    {
+      provide: HDT_BASE_PATH, useFactory: getHdtBasePath,
+      deps: [AppConfigService]
+    },
+    AppConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFn,
+      multi: true,
+      deps: [AppConfigService]
+    }
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
 }

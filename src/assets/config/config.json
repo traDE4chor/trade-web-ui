@@ -1,0 +1,4 @@
+{
+  "HDT_API_BASE_PATH": "http://localhost:8082",
+  "TRADE_API_BASE_PATH": "http://localhost:8081/api"
+}

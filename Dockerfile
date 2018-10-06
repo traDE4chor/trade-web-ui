@@ -35,9 +35,9 @@ RUN rm -rf /usr/share/nginx/html/*
 ## From 'builder' stage copy over the artifacts in dist folder to default nginx public folder
 COPY --from=builder /ng-app/dist /usr/share/nginx/html
 
-ADD config/config.json.tpl /usr/share/nginx/html/config.properties.tpl
+COPY src/assets/config/config.json.tpl /usr/share/nginx/html/assets/config/config.json.tpl
 
-CMD ["dockerize", "-template", "/usr/share/nginx/html/config.properties.tpl:/usr/share/nginx/html/config.properties", "nginx", "-g", "daemon off;"]
+CMD ["dockerize", "-template", "/usr/share/nginx/html/assets/config/config.json.tpl:/usr/share/nginx/html/assets/config/config.json", "nginx", "-g", "daemon off;"]
 
 #
 # Build and run:
