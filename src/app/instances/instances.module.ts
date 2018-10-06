@@ -11,6 +11,7 @@ import {DataObjectInstanceDetailsComponent} from "./dataObject/data-object-insta
 import {DataElementInstanceListComponent} from "./dataElement/data-element-instance-list.component";
 import {DataElementInstanceDetailsComponent} from "./dataElement/data-element-instance-details.component";
 import {CustomPipesModule} from "../pipes/pipes.module";
+import {DataModule} from "../data/data.module";
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import {CustomPipesModule} from "../pipes/pipes.module";
     ReactiveFormsModule,
     InstanceRoutingModule,
     PaginationModule,
-    CustomPipesModule
+    CustomPipesModule,
+    DataModule
   ],
   declarations: [
     InstancesOverviewComponent,
@@ -27,6 +29,10 @@ import {CustomPipesModule} from "../pipes/pipes.module";
     DataObjectInstanceDetailsComponent,
     DataElementInstanceListComponent,
     DataElementInstanceDetailsComponent
+  ],
+  exports: [
+    DataObjectInstanceListComponent,
+    DataElementInstanceListComponent
   ]
 })
 export class InstancesModule {}

@@ -32,6 +32,9 @@ import {PaginationModule} from "../pagination/pagination.module";
     DataValueDetailsComponent,
     DataValueFormComponent,
     ContentTypeValidatorDirective
+  ],
+  exports: [
+    DataValueListComponent
   ]
 })
 export class DataModule {

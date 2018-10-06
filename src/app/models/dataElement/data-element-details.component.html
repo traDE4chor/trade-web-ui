@@ -46,5 +46,8 @@
     </table>
   </div>
 
+  <data-element-instance-list *ngIf="dataElement$ | async as currentDE" [dataElement]="currentDE"
+                             [dataElementMode]="true"></data-element-instance-list>
+
   <a class="btn btn-info" routerLink="/models/dataElements" role="button">Back</a>
 </div>

@@ -1,10 +1,49 @@
 <h1 class="page-header">Transformations Overview</h1>
 
-<h3 class="sub-header">Data Transformation Bundles</h3>
-<div class="grid grid-pad">
-  <div *ngFor="let service of notifierServiceArray" class="col-1-4">
-    <div>
-      <h4>{{service.id}} : {{service.href}}</h4>
-    </div>
-  </div>
+<div class="sub-header headline-with-image">
+  <img class="headline-image"
+       src="../assets/trade-data-transformation-bundle-icon.png">
+  <h2 class="headline-text">Data Transformation Bundles</h2>
 </div>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Publisher</th>
+      <th>Tags</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let app of applicationsArray">
+      <td>{{app.appInfo.appName}}</td>
+      <td>{{app.appInfo.appPublisher}}</td>
+      <td>{{app.appInfo.tags}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<a class="btn btn-info" routerLink="/transformations/bundles" role="button">List of data transformation bundles</a>
+
+<div class="sub-header headline-with-image">
+  <img class="headline-image"
+       src="../assets/trade-data-transformation-icon.png">
+  <h2 class="headline-text">Data Transformations</h2>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Task ID</th>
+      <th>State</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let task of tasksArray">
+      <td>{{task.taskID}}</td>
+      <td>{{task.state}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<a class="btn btn-info" routerLink="/transformations/transformationTasks" role="button">List of data transformations</a>

@@ -37,5 +37,8 @@
   <data-element-list *ngIf="dataObject$ | async as currentDO" [dataObject]="currentDO"
                      [dataObjectMode]="true"></data-element-list>
 
+  <data-object-instance-list *ngIf="dataObject$ | async as currentDO" [dataObject]="currentDO"
+                     [dataObjectMode]="true"></data-object-instance-list>
+
   <a class="btn btn-info" routerLink="/models/dataObjects" role="button">Back</a>
 </div>

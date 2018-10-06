@@ -1,0 +1,45 @@
+<h2>Create a Data Dependency Graph</h2>
+<form #appForm="ngForm">
+  <div class="form-group">
+    <label for="appName">Name:</label>
+    <input class="form-control" required [(ngModel)]="appArchive.name" name="name" #name="ngModel"
+           placeholder="name of DT bundle"
+           id="appName">
+    <div *ngIf="name.invalid && (name.dirty || name.touched)"
+         class="alert alert-danger">
+      A Name for the DT bundle is required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="form-check-label" for="appDeploy">Deploy:</label>
+    <input type="checkbox" class="form-check" [(ngModel)]="appArchive.deploy" name="deploy"
+           title="Whether the DT bundle should be DEPLOYED immediately or not"
+           id="appDeploy">
+  </div>
+
+  <div class="form-group">
+    <label class="form-check-label" for="appTest">Test:</label>
+    <input type="checkbox" class="form-check" [(ngModel)]="appArchive.test" name="test"
+           title="Whether the DT bundle should be TESTED immediately or not"
+           id="appTest">
+  </div>
+
+  <div class="form-group">
+    <label for="appArchive">Bundle Archive URL:</label>
+    <input class="form-control" required [(ngModel)]="appArchive.archiveURL" name="archive" #archive="ngModel"
+           placeholder="URL of DT bundle archive"
+           id="appArchive">
+    <div *ngIf="archive.invalid && (archive.dirty || archive.touched)"
+         class="alert alert-danger">
+      A URL to the bundle which provides the packaged DT bundle archive is required
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-success" [disabled]="appForm.invalid" (click)="submitApp()">Submit
+  </button>
+  <button type="button" class="btn btn-default" (click)="newApp(); appForm.resetForm({})">Reset</button>
+</form>
+
+<br>
+<a class="btn btn-info" routerLink="/transformations/bundles" role="button">Cancel</a>

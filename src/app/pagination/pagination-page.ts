@@ -45,7 +45,10 @@ export function queryPaginated<S, T>(http: HttpClient, basePath: string, propert
 
     page.start = params['start'] ? +params['start'] : 1;
     page.size = params['size'] ? +params['size'] : 10;
-    page.results = result[property];
+
+    if (property != null) {
+      page.results = result[property];
+    }
 
     return page;
   }));
@@ -58,6 +61,6 @@ const decodeURLParams = search => {
     const split = hash.indexOf("=");
     const key = hash.slice(0, split);
     const val = hash.slice(split + 1);
-    return Object.assign(params, { [key]: decodeURIComponent(val) });
+    return Object.assign(params, {[key]: decodeURIComponent(val)});
   }, {});
 };

@@ -12,9 +12,9 @@
 
 
 export interface OutputFile {
-    name?: string;
+    outputName?: string;
     alias?: string;
     format?: string;
-    schemaPath?: string;
+    schema?: string;
     accessPath?: string;
 }

@@ -1,10 +1,49 @@
 <h1 class="page-header">Notifications Overview</h1>
 
-<h3 class="sub-header">Available Notifier Services</h3>
-<div class="grid grid-pad">
-  <div *ngFor="let service of notifierServiceArray" class="col-1-4">
-    <div>
-      <h4>{{service.id}} : {{service.href}}</h4>
-    </div>
-  </div>
+<div class="sub-header headline-with-image">
+  <img class="headline-image"
+       src="../assets/trade-notification-icon.png">
+  <h2 class="headline-text">Notifications</h2>
 </div>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type Of Resource To Observe</th>
+      <th>Notifier Service</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let notificationsWithLinks of notificationArray">
+      <td>{{notificationsWithLinks.notification.name}}</td>
+      <td>{{notificationsWithLinks.notification.typeOfResourceToObserve}}</td>
+      <td>{{notificationsWithLinks.notification.selectedNotifierServiceId}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<a class="btn btn-info" routerLink="/notifications/notifications" role="button">List of notifications</a>
+
+<div class="sub-header headline-with-image">
+  <img class="headline-image"
+       src="../assets/trade-notifier-service-icon.png">
+  <h2 class="headline-text">Notifier Services</h2>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Parameters</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let notifiersWithLinks of notifierServiceArray">
+      <td>{{notifiersWithLinks.id}}</td>
+      <td>{{stringifyParameters(notifiersWithLinks.parameters)}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<a class="btn btn-info" routerLink="/notifications/notifierServices" role="button">List of notifier services</a>

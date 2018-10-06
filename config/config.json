@@ -1,4 +1,4 @@
 {
-  "HDT_URL": "http://localhost:8080/",
+  "HDT_URL": "http://localhost:8082",
   "TraDE_URL": "http://localhost:8081/api"
 }

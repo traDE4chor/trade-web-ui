@@ -12,10 +12,10 @@
 
 
 export interface InputFile {
-    name?: string;
+    inputName?: string;
     alias?: string;
     isOptional?: boolean;
     format?: string;
-    schemaPath?: string;
+    schema?: string;
     requiredPath?: string;
 }

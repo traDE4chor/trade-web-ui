@@ -1,0 +1,38 @@
+<h1 class="page-header">Data Transformation Bundles</h1>
+
+<div [formGroup]="filterForm">
+  <div class="search-bar">
+    <select formControlName="queryParameter" [value]="'tags'">
+      <option [value]="'tags'">tags</option>
+    </select>
+    <input formControlName="search" placeholder="Search by selected parameter">
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Version</th>
+      <th>Publisher</th>
+      <th>Tags</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr
+      *ngFor="let app of (page | async)?.results; trackBy:trackByApp">
+      <td><a [routerLink]="['/transformations/bundles', app.appInfo.appID]">{{app.appInfo.appName}}</a></td>
+      <td>{{app.appInfo.appPublisher}}</td>
+      <td>{{app.appInfo.tags}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-paginator [page]="page | async" (pageChange)="onPageChanged($event)"></app-paginator>
+
+<div class="btn-group" role="group" aria-label="Create or cancel">
+  <a class="btn btn-info" routerLink="/transformations" role="button">Back</a>
+  <a class="btn btn-primary" routerLink="/transformations/bundles?create" role="button">Create</a>
+</div>

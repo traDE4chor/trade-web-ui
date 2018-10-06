@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Application, ApplicationsService, Task, TasksService} from "../hdtapps-client";
 
-import { NotifierServiceArray } from '../trade-client/model/notifierServiceArray';
-import { NotifierServiceService } from '../trade-client/api/notifierService.service';
 
 @Component({
   selector: 'transformations',
@@ -9,13 +8,19 @@ import { NotifierServiceService } from '../trade-client/api/notifierService.serv
 })
 export class TransformationsOverviewComponent implements OnInit {
 
-  notifierServiceArray: NotifierServiceArray;
+  applicationsArray: Application[];
 
-  constructor(private notifierService: NotifierServiceService) { }
+  tasksArray: Task[];
+
+  constructor(private appsService: ApplicationsService, private taskService: TasksService) {
+  }
 
   ngOnInit(): void {
-    this.notifierService.getNotifierServices().subscribe(result => this
-    .notifierServiceArray = result.notifierServices, error => console.error('An error occurred', error));
+    this.appsService.hdtappsApiFindApps().subscribe(result => this
+      .applicationsArray = result, error => console.error('An error occurred', error));
+
+    /*this.taskService.hdtappsApiListTasks().subscribe(result => this
+      .applicationsArray = result, error => console.error('An error occurred', error));*/
   }
 
 }

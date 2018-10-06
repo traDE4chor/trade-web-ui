@@ -16,6 +16,7 @@ import {DataObjectDetailsComponent} from './dataObject/data-object-details.compo
 import {DataElementListComponent} from "./dataElement/data-element-list.component";
 import {DataElementDetailsComponent} from "./dataElement/data-element-details.component";
 import {CustomPipesModule} from "../pipes/pipes.module";
+import {InstancesModule} from "../instances/instances.module";
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import {CustomPipesModule} from "../pipes/pipes.module";
     ModelRoutingModule,
     FileUploadModule,
     PaginationModule,
-    CustomPipesModule
+    CustomPipesModule,
+    InstancesModule
   ],
   declarations: [
     ModelsOverviewComponent,

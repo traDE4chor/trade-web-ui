@@ -6,7 +6,7 @@ import {
   DataElementInstanceArray,
   DataElementInstanceArrayWithLinks,
   DataElementInstanceWithLinks,
-  DataObjectInstanceWithLinks
+  DataObjectInstanceWithLinks, DataElementWithLinks
 } from "../../trade-client";
 import {HttpClient} from "@angular/common/http";
 import {debounceTime, share, startWith, switchMap} from "rxjs/operators";
@@ -21,6 +21,8 @@ export class DataElementInstanceListComponent implements OnInit {
 
   @Input() dataObjectMode: boolean = false;
   @Input() dataObjectInstance: DataObjectInstanceWithLinks;
+  @Input() dataElementMode: boolean = false;
+  @Input() dataElement: DataElementWithLinks;
 
   startIndex: number = 1;
   size: number = 10;
@@ -45,6 +47,8 @@ export class DataElementInstanceListComponent implements OnInit {
   ngOnInit(): void {
     if (this.dataObjectMode) {
       this.page = merge(this.filterForm.valueChanges.pipe(debounceTime(500), switchMap(urlOrFilter => this.listDataElementInstances(urlOrFilter)), share()), this.pageUrl.pipe(startWith(this.basePath + '/dataObjectInstances/' + this.dataObjectInstance.instance.id + '/elementInstances' + '?start=' + this.startIndex + '&size=' + this.size), switchMap(url => this.listDataElementInstances(url))));
+    } else if (this.dataElementMode) {
+      this.page = merge(this.filterForm.valueChanges.pipe(debounceTime(500), switchMap(urlOrFilter => this.listDataElementInstances(urlOrFilter)), share()), this.pageUrl.pipe(startWith(this.basePath + '/dataElements/' + this.dataElement.dataElement.id + '/instances' + '?start=' + this.startIndex + '&size=' + this.size), switchMap(url => this.listDataElementInstances(url))));
     } else {
       this.page = merge(this.filterForm.valueChanges.pipe(debounceTime(500), switchMap(urlOrFilter => this.listDataElementInstances(urlOrFilter)), share()), this.pageUrl.pipe(startWith(this.basicUrl), switchMap(url => this.listDataElementInstances(url))));
     }

@@ -40,7 +40,7 @@
 
 <app-paginator [page]="page | async" (pageChange)="onPageChanged($event)"></app-paginator>
 
-<div class="btn-group" role="group" aria-label="Create or cancel">
+<div *ngIf="!dataElementInstanceMode" class="btn-group" role="group" aria-label="Create or cancel">
   <a class="btn btn-info" routerLink="/data" role="button">Back</a>
   <a class="btn btn-primary" routerLink="/data/dataValues?create" role="button">Create</a>
 </div>

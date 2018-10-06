@@ -40,4 +40,4 @@
 
 <app-paginator [page]="page | async" (pageChange)="onPageChanged($event)"></app-paginator>
 
-<a class="btn btn-info" routerLink="/instances" role="button">Back</a>
+<a *ngIf="!dataObjectMode" class="btn btn-info" routerLink="/instances" role="button">Back</a>

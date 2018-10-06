@@ -12,9 +12,9 @@
 
 
 export interface InputParameter {
-    name?: string;
+    inputName?: string;
     alias?: string;
     isOptional?: boolean;
     value?: string;
-    paramType?: string;
+    type?: string;
 }

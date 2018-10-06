@@ -1,11 +1,11 @@
-import {Component, Inject, OnInit, Optional} from '@angular/core';
+import {Component, Inject, Input, OnInit, Optional} from '@angular/core';
 import {merge, Observable, Subject} from "rxjs";
 import {Page, queryPaginated} from "../../pagination/pagination-page";
 import {
   TRADE_BASE_PATH,
   DataObjectInstanceArray,
   DataObjectInstanceArrayWithLinks,
-  DataObjectInstanceWithLinks
+  DataObjectInstanceWithLinks, DataObjectWithLinks
 } from "../../trade-client";
 import {HttpClient} from "@angular/common/http";
 import {debounceTime, share, startWith, switchMap} from "rxjs/operators";
@@ -17,6 +17,9 @@ import {FormControl, FormGroup} from "@angular/forms";
 })
 export class DataObjectInstanceListComponent implements OnInit {
 
+  @Input() dataObjectMode: boolean = false;
+  @Input() dataObject: DataObjectWithLinks;
+
   startIndex: number = 1;
   size: number = 10;
 
@@ -24,18 +27,24 @@ export class DataObjectInstanceListComponent implements OnInit {
   page: Observable<Page<DataObjectInstanceArray>>;
   pageUrl = new Subject<string>();
 
+  basePath: string;
   basicUrl: string;
 
   constructor(private http: HttpClient, @Optional() @Inject(TRADE_BASE_PATH) basePath: string) {
+    this.basePath = basePath;
     this.basicUrl = basePath + '/dataObjectInstances' + '?start=' + this.startIndex + '&size=' + this.size;
     this.filterForm = new FormGroup({
       queryParameter: new FormControl(),
       search: new FormControl()
     });
-    this.page = merge(this.filterForm.valueChanges.pipe(debounceTime(500), switchMap(urlOrFilter => this.listDataObjectInstances(urlOrFilter)), share()), this.pageUrl.pipe(startWith(this.basicUrl), switchMap(url => this.listDataObjectInstances(url))));
   }
 
   ngOnInit(): void {
+    if (this.dataObjectMode) {
+      this.page = merge(this.filterForm.valueChanges.pipe(debounceTime(500), switchMap(urlOrFilter => this.listDataObjectInstances(urlOrFilter)), share()), this.pageUrl.pipe(startWith(this.basePath + '/dataObjects/' + this.dataObject.dataObject.id + '/instances' + '?start=' + this.startIndex + '&size=' + this.size), switchMap(url => this.listDataObjectInstances(url))));
+    } else {
+      this.page = merge(this.filterForm.valueChanges.pipe(debounceTime(500), switchMap(urlOrFilter => this.listDataObjectInstances(urlOrFilter)), share()), this.pageUrl.pipe(startWith(this.basicUrl), switchMap(url => this.listDataObjectInstances(url))));
+    }
   }
 
   trackByDataObjectInstance(index: number, dataObject: DataObjectInstanceWithLinks): string {

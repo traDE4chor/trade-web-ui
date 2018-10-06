@@ -3,10 +3,8 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
-import config from "../../config/config.json";
-
 export const environment = {
   production: false,
-  TRADE_API_BASE_PATH: config.TraDE_URL,
-  HDT_API_BASE_PATH: config.HDT_URL
+  TRADE_API_BASE_PATH: 'http://localhost:8081/api',
+  HDT_API_BASE_PATH: 'http://localhost:8082'
 };

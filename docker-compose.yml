@@ -1,0 +1,57 @@
+version: '3'
+services:
+  
+  trade-middleware:
+    image: trade4chor/trade-core
+    environment:
+      - TRADE_URL=http://trade-middleware:8081/api
+      - PERSISTENCE_MODE=DB
+      - MONGO_DB_URL=mongodb://mongodb:27017
+    ports:
+      - '8081:8081'
+    networks:
+      - trade
+    depends_on:
+    - mongodb
+      
+  trade-web-ui:
+    build:
+      context: .
+    image: trade4chor/trade-web-ui
+    environment:
+      - TraDE_URL=http://localhost:8081/api
+    ports:
+      - '80:80'
+    networks:
+      - trade
+    depends_on:
+      - trade-middleware
+
+  mongodb:
+    image: mongo
+    environment:
+    - MONGO_DATA_DIR=/db-data/db
+    - MONGO_LOG_DIR=/db-dev/null
+    ports:
+    - 27017:27017
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
+    networks:
+    - trade
+
+networks:
+  trade:
+    driver: bridge
+
+#
+# Build and run as daemon:
+#
+#   docker-compose build
+#
+#   docker-compose up -d
+#
+# The containers are running in the background and remain active until they are explicitly stopped by running:
+#
+#   docker-compose stop
+#
+# For further details on Docker compose see https://docs.docker.com/compose/overview/
+#
