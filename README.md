@@ -1,4 +1,8 @@
-# TradeWebUi
+# trade-web-ui
+
+[![Docker Status](https://dockerbuildbadges.quelltext.eu/status.svg?organization=trade4chor&repository=trade-core)](https://hub.docker.com/r/trade4chor/trade-web-ui/)
+
+Web UI of the TraDE ecosystem supporting user interactions with the [TraDE Middleware](https://github.com/traDE4chor/trade-core) and the [DT Integration Middleware](https://github.com/traDE4chor/hdtapps-prototype).
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.3.2.
 
